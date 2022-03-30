@@ -16,4 +16,3 @@ if check_self_collision
 end
 
 end
-

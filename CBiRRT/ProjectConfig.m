@@ -1,5 +1,6 @@
 function [ns,found] = ProjectConfig(ns_old,ns,TSR,robot,eps,max_step)
 
+    % used to calculate the geometric jacobian
     endeffector_name = robot.Bodies(end);
     endeffector_name = endeffector_name{1}.Name;
 
@@ -21,7 +22,4 @@ function [ns,found] = ProjectConfig(ns_old,ns,TSR,robot,eps,max_step)
         end
     end
     
-
-
 end
-

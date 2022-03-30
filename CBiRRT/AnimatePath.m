@@ -6,7 +6,8 @@ subplot(2,2,1), title('test'),
 robot.show(node2config(path(1),robot),'PreservePlot',false,'FastUpdate',false);
 
 subplot(2,2,3)
-robot.show(node2config(path(length(path)),robot),'PreservePlot',false,'FastUpdate',false);
+robot.show(node2config(path(length(path)),robot),'PreservePlot',false,...
+    'FastUpdate',false);
 
 subplot(2,2,[2,4]), hold on,
 ShowPath(path,robot,false),
@@ -26,4 +27,3 @@ for i=1:length(path)
 
 end
 end
-

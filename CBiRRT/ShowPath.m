@@ -1,6 +1,7 @@
 function ShowPath(path,robot,new_fig)
 
-path_T = cell2mat(arrayfun(@(node) tform2trvec(node.directKin(robot)), path, 'UniformOutput', false));
+path_T = cell2mat(arrayfun(@(node) tform2trvec(node.directKin(robot)), path,...
+    'UniformOutput', false));
 path_T = reshape(path_T,3,[]);
 
 if nargin == 3
@@ -17,4 +18,3 @@ plot3(path_T(1,:),path_T(2,:),path_T(3,:),'-.o','Color','b','MarkerSize',6,...
     'MarkerFaceColor','#D9FFFF'), grid on; % b D9FFFF
 
 end
-
