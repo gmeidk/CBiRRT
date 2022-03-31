@@ -26,8 +26,8 @@ CHECK_SELF_COLLISION = false;
 % TSR Definition
 
 Bw = [-Inf, Inf; -Inf, Inf; -0.027, 0.027; -Inf, Inf; -Inf, Inf; -Inf, Inf];
-T0_w = trvec2tform([0.5, 0.5, 0]);
-angle_z = -pi;
+T0_w = trvec2tform([0, 0, 0]);
+angle_z = 0;
 Tw_e = [cos(angle_z)    sin(angle_z)    0       0
         -sin(angle_z)   cos(angle_z)    0       0
         0                   0           1       0
@@ -38,6 +38,8 @@ tsr = TSR(T0_w,Tw_e,Bw);
 %% CBiRRT Algorithm
 
 [path, debug] = CBiRRT(n_start,n_goal,robot,tsr,CHECK_SELF_COLLISION,MAX_STEP,eps,MAX_ITERATION);
+debug.iterations
+debug.time_elapsed
 
 %% Data Visualization
 
@@ -49,3 +51,9 @@ ShowTree(robot,debug.Ta,debug.Tb);
 
 figure(2)
 plot(1:MAX_ITERATION,debug.history);
+
+%% 
+hold on,
+[x y] = meshgrid(-1:2:1);
+z = 0*x + 0*y;
+surf(x,y,z,'FaceAlpha',0.2,'FaceColor','r');

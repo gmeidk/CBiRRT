@@ -1,4 +1,5 @@
-function [T, n_reach] = ConstraintExtend(T,n_near,n_target,TSR,check_self_collision,false_collision,robot,max_step,max_iteration,eps)
+function [T, n_reach] = ConstraintExtend(T,n_near,n_target,TSR,...
+    check_self_collision,false_collision,robot,max_step,max_iteration,eps)
 
 iterations = 1;
 

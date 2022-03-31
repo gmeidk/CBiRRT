@@ -1,6 +1,9 @@
 function [path, debug] = CBiRRT(n_start,n_goal,robot,TSR,check_self_collision,max_step,eps,max_iteration)
 
 try
+    tic
+    old_toc = 0;
+
     bar = waitbar(0,'Ricerca in corso...', 'Name','CBiRRT - Quatela, Roberto', 'CreateCancelBtn','setappdata(gcbf,''canceling'',1)');
     setappdata(bar,'canceling',0);
 
@@ -29,7 +32,7 @@ try
     n_reach1_min_back = false;
 
 
-    time_it_old = 0.28;
+    time_it_old = 2;
 
 
     while true
@@ -52,8 +55,6 @@ try
             disp("Soluzione non trovata");
             break
         end
-
-        tic
 
         n_rand = RandomConfig(robot);
 
@@ -92,14 +93,15 @@ try
 
         % estimation of remaining time displayed on the waitbar
         iterations = iterations + 1;
-        time_it = time_it_old * 0.9 + 0.1 * toc;
+        time_it = time_it_old * 0.9 + 0.1 * (toc - old_toc);
+        old_toc = toc;
         time_it_old = time_it;
         time_est = floor(time_it*(max_iteration-iterations));
         waitbar(iterations/max_iteration,bar,strjoin(["Ricerca in corso... (",iterations," iter, ",time_est," sec)"]));
     end
 
     % save the debug structure and close the waitbar
-    debug = struct('history', dist, 'Ta', Ta, 'Tb', Tb, 'iterations', iterations);
+    debug = struct('history', dist, 'Ta', Ta, 'Tb', Tb, 'iterations', iterations, 'time_elapsed', toc);
     delete(bar);
 
 % catch the error and stop the algorithm
